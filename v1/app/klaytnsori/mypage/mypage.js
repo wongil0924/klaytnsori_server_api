@@ -4,7 +4,19 @@ var result = require('../../../../result');
 
 //거래내역 확인
 router.get('/transaction', function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.query.session_id){
+    isVlid = false;
+    validationError.errors.session_id = { message : 'Session Error'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 }, function(req,res,next){
   var u_klay;
   //DB에서 해당 session_id로 들어온 사용자의 email을 확인 후 caver로 거래 내역 조회
@@ -19,7 +31,19 @@ router.get('/transaction', function(req,res,next){
 
 //내가 올린 질문 리스트
 router.get('/my_question_list', function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.query.session_id){
+    isVlid = false;
+    validationError.errors.session_id = { message : 'Session Error'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 }, function(req,res,next){
   //DB에서 해당 유저의 질문을 가져옴
 
@@ -35,7 +59,19 @@ router.get('/my_question_list', function(req,res,next){
 
 //내가 답변 단 글 리스트
 router.get('/my_answer_list', function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.query.session_id){
+    isVlid = false;
+    validationError.errors.session_id = { message : 'Session Error'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 }, function(req,res,next){
   //DB에서 해당 유저의 답변을 가져옴
 
@@ -49,7 +85,19 @@ router.get('/my_answer_list', function(req,res,next){
 
 //내가 like 누른 글 리스트
 router.get('/my_like_list', function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.query.session_id){
+    isVlid = false;
+    validationError.errors.session_id = { message : 'Session Error'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 }, function(req,res,next){
   //DB에서 해당 유저의 like를 가져옴
 
@@ -63,7 +111,19 @@ router.get('/my_like_list', function(req,res,next){
 
 //내가 보유하고 있는 klay양
 router.get('/my_remain_klay', function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.query.session_id){
+    isVlid = false;
+    validationError.errors.session_id = { message : 'Session Error'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 }, function(req,res,next){
   //DB에서 해당 유저의 wallet의 정보를 가져옴
 
