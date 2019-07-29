@@ -13,8 +13,40 @@ router.get('/category', function(req,res,next){
 
 //질문 작성
 router.post('/insert_question', function(req,res,next){
-  d
-},function(req,res,next){
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.body.session_id){
+    isValid = false;
+    validationError.errors.session_id = {message : 'Session Error' };
+  }
+
+  if(!req.body.question_title){
+    isValid = false;
+    validationError.errors.question_title = {message : 'Title is empty' };
+  }
+
+  if(!req.body.quetion_klay){
+    isValid = false;
+    validationError.errors.question_klay = {message : 'Klay is empty' };
+  }
+
+  if(!req.body.question_content){
+    isValid = false;
+    validationError.errors.question_content = {message : 'Content is empty' };
+  }
+
+  if(!req.body.category){
+    isValid = false;
+    validationError.errors.category = {message : 'Choose the category' };
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
+}, function(req,res,next){
   var u_sid = req.body.session_id;
   var u_address;
   //DB에서 해당 session_id로 email찾고 해당 user의 지갑주소를 가져온다.
@@ -36,7 +68,19 @@ router.post('/insert_question', function(req,res,next){
 
 //질문 보기
 router.get('/show_question',function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors:{}
+  };
+
+  if(!req.query.question_id){
+    isValid = false;
+    validationError.errors.question_id = {message:'404 Not Found'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 },function(req,res,next){
   //DB에서 해당 question_id에 해당하는 내용을 모두 가져온다.
 
@@ -53,7 +97,19 @@ router.get('/show_question',function(req,res,next){
 
 //질문 리스트
 router.get('/question_list',function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.query.question_state){
+    isValid = false;
+    validationError.errors.question_state = { message : '404 Not Found'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 }, function(req,res,next){
   var q_date;
   //DB에서 시간을 꺼내와서 현재시간과 비교 후 남은 시간을 보내줌
@@ -72,7 +128,29 @@ router.get('/question_list',function(req,res,next){
 
 //답변 등록
 router.post('/insert_answer', function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.body.question_id){
+    isValid = false;
+    validationError.errors.question_id = { message : '404 Not Found'};
+  }
+
+  if(!req.body.session_id){
+    isValid = false;
+    validationError.errors.session_id = { message : 'Session Error'};
+  }
+
+  if(!req.body.answer_content){
+    isValid = false;
+    validationError.errors.answer_content = { message : 'Answer is empty'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 }, function(req,res,next){
 
   //DB에 답변 table에 들어오는 정보 저장.
@@ -83,7 +161,29 @@ router.post('/insert_answer', function(req,res,next){
 
 //Like 등록
 router.post('/insert_like', function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.body.question_id){
+    isValid = false;
+    validationError.errors.question_id = { message : '404 Not Found'};
+  }
+
+  if(!req.body.session_id){
+    isValid = false;
+    validationError.errors.session_id = { message : 'Session Error'};
+  }
+
+  if(!req.body.answer_id){
+    isValid = false;
+    validationError.errors.answer_id = { message : '404 Not Found'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 },function(req,res,next){
 
   //DB에 like table에 들어오는 정보 저장.
@@ -94,7 +194,29 @@ router.post('/insert_like', function(req,res,next){
 
 //답변 채택
 router.post('/select_answer',function(req,res,next){
-  d
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+
+  if(!req.body.question_id){
+    isValid = false;
+    validationError.errors.question_id = { message : '404 Not Found'};
+  }
+
+  if(!req.body.session_id){
+    isValid = false;
+    validationError.errors.session_id = { message : 'Session Error'};
+  }
+
+  if(!req.body.answer_id){
+    isValid = false;
+    validationError.errors.answer_id = { message : '404 Not Found'};
+  }
+
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
 },function(req,res,next){
   //DB에서 question의 상태 update
   var u_email;
