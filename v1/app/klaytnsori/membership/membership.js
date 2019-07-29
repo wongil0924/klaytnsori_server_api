@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var result = require('../result');
+var result = require('../../../../result');
 var caver = require('caver-js');
 
 //login
