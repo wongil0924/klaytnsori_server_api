@@ -2,7 +2,12 @@ var express = require('express');
 var router = express.Router();
 var result = require('../../../../result');
 var caver = require('caver-js');
+var myspl = require('mysql');
+var dbconfig = require('../../../../database.js');
+var connection = mysql.createConnection(dbconfig);
 
+//DB사용시 connection.connet();
+//DB사용 종료시 connection.end();
 //카테고리 요청
 router.get('/category', function(req,res,next){
   //DB에서 category관련 data를 받아서 출력

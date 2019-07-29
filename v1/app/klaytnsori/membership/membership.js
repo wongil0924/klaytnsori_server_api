@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var result = require('../../../../result');
 var caver = require('caver-js');
+var myspl = require('mysql');
+var dbconfig = require('../../../../database.js');
+var connection = mysql.createConnection(dbconfig);
+
+//DB사용시 connection.connet();
+//DB사용 종료시 connection.end();
 
 //login
 router.post(('/login'),function(req,res,next){

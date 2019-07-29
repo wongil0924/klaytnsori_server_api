@@ -1,6 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var result = require('../../../../result');
+var myspl = require('mysql');
+var dbconfig = require('../../../../database.js');
+var connection = mysql.createConnection(dbconfig);
+
+//DB사용시 connection.connet();
+//DB사용 종료시 connection.end();
 
 //거래내역 확인
 router.get('/transaction', function(req,res,next){
