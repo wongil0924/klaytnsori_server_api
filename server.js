@@ -4,6 +4,7 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 var app = express();
 
+/*
 //database
 var klaytnsoridb = mysql.createConnection({
   host : 'klaytn-database.ciitcrpahoo9.ap-northeast-2.rds.amazonaws.com',
@@ -12,7 +13,7 @@ var klaytnsoridb = mysql.createConnection({
   database : 'klaytndb',
   port : 3306
 });
-
+*/
 //middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
