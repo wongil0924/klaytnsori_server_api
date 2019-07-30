@@ -24,8 +24,9 @@ router.get('/transaction', function(req,res,next){
   if(!isValid) return res.json(result.successFalse(validationError));
   else next();
 }, function(req,res,next){
-  var u_klay;
+  var u_wallet_address;
   //DB에서 해당 session_id로 들어온 사용자의 email을 확인 후 caver로 거래 내역 조회
+
 
   var data = {
     klay : ,
@@ -133,10 +134,13 @@ router.get('/my_remain_klay', function(req,res,next){
 }, function(req,res,next){
   //DB에서 해당 유저의 wallet의 정보를 가져옴
 
-  //caver에서 해당 유저의 klay양을 가져옴
+
+  var u_wallet_address;
+  var u_klay = caver.klay.getBalance('u_wallet_address');
+  //큰 따음표일 수 있다.
 
   var data = {
-    klay :
+    klay : u_klay
   };
   return res.json(result.successTrue(data));
 });
