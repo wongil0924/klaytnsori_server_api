@@ -32,6 +32,7 @@ router.get('/transaction', function(req,res,next){
     klay : ,
     trans_time : ,
     trans_content : ,
+    recipient_address : 
   };
   return res.json(result.successTrue(data));
 });
