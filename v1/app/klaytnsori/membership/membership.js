@@ -86,13 +86,18 @@ router.post('/signup', function(req,res,next){
   if(_ok)
   {
     //caver에서 wallet 생성 후 privateKey와 Address를 돌려줌
+    const account = caver.klay.accounts.create();
+    caver.klay.accounts.wallet.add('account.privateKey', 'account.address');
+    _address = account.address;
+    _privateK = account.privateKey;
     //DB에 추가 email,password, address, privatekey를 저장
 
     var data = {
-      wallet_address: _address
+
     };
     return res.json(result.successTrue(data));
   }
+
   else{
     var emailError = {
       name : 'email 중복',
