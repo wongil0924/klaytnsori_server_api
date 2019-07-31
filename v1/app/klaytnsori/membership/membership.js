@@ -9,7 +9,14 @@ var connection = mysql.createConnection(dbconfig);
 //DB사용시 connection.connet();
 //DB사용 종료시 connection.end();
 
-//login
+/*
+*Log-in API
+*Request
+*email : Klaytnsori user's ID &autho usage
+*password : Klaytnsori user's email -password
+*Response
+*session_id : session -> prevent redundent login
+*/
 router.post(('/login'),function(req,res,next){
   var isValid = true;
   var validationError = {
@@ -45,7 +52,13 @@ router.post(('/login'),function(req,res,next){
     }
   });
 
-//logout
+/*
+*Log-out API
+*Request
+*Session id -> clear session table && enable log-in at other envirement
+*Response
+*if success log-out, return in result.json result = true.
+*/
 router.post('/logout', function(req,res){
 
   var logout_session = req.body.session_id;
@@ -56,7 +69,17 @@ router.post('/logout', function(req,res){
   return res.json(result.successTrue(data));
 });
 
-//signup
+/*
+*Sing-up API
+*if new user join in klaytnsori service, new user should make new account.
+*This account uses in only klaytnsori service.
+*But user can send or receive from other accounts.
+*Request
+*email : new user's using email like ID.
+*password : authorize user.
+*Response
+*if success sign-up, return in result.json result = true.
+*/
 router.post('/signup', function(req,res,next){
   var isValid = true;
   var validationError = {
@@ -78,9 +101,7 @@ router.post('/signup', function(req,res,next){
 }, function(req,res,next){
   var u_email = req.body.email;
   var u_pw = req.body.password;
-  var _ok;
-  var _address;
-  var _privateK;
+  var _ok = true;
   //DB에서 email에 대한 중복 여부 확인 후 boolen으로 _OK를 리턴 맞다면 true
 
   if(_ok)
@@ -88,12 +109,11 @@ router.post('/signup', function(req,res,next){
     //caver에서 wallet 생성 후 privateKey와 Address를 돌려줌
     const account = caver.klay.accounts.create();
     caver.klay.accounts.wallet.add('account.privateKey', 'account.address');
-    _address = account.address;
-    _privateK = account.privateKey;
+    var _address = account.address;
+    var _privateK = account.privateKey;
     //DB에 추가 email,password, address, privatekey를 저장
 
     var data = {
-
     };
     return res.json(result.successTrue(data));
   }
@@ -108,7 +128,14 @@ router.post('/signup', function(req,res,next){
   }
 });
 
-//find_pw
+/*
+*Find password API
+*if user forgot user's password, find the password.
+*Request
+*email : authorize the user.
+*Response
+*Password : user's password.
+*/
 router.get('find_pw', function(req,res){
   var _email = req.body.email;
   var _pw;
@@ -118,7 +145,15 @@ router.get('find_pw', function(req,res){
   return res.json(result.successTrue(data));
 });
 
-//modify_pw
+/*
+*Modify password API
+*if user want to modify user's password.
+*Request
+*session_id : authorize user.
+*password : change password.
+*Response
+*if success modify password, return in result.json result = true.
+*/
 router.post('/modify_pw', function(req,res){
   var _email = req.body.email;
   var m_pw = req.body.password;
