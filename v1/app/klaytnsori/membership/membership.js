@@ -154,11 +154,23 @@ router.get('find_pw', function(req,res){
 *Response
 *if success modify password, return in result.json result = true.
 */
-router.post('/modify_pw', function(req,res){
-  var _email = req.body.email;
+router.post('/modify_pw', function(req,res,next){
+  var isValid = true;
+  var validationError = {
+    name : 'ValidationError',
+    errors : {}
+  };
+  if(!req.body.session_id){
+    isValid = false;
+    validationError.errors.session_id = {message: 'Session Error'};
+  }
+  if(!isValid) return res.json(result.successFalse(validationError));
+  else next();
+}, function(req,res,next){
+  var _session = req.body.session_id;
   var m_pw = req.body.password;
 
-  //DB에서 해당 email에 pw를 변경
+  //DB에서 해당 session_id로 email을 확인한 후 pw를 변경
   return res.json(result.successTrue()={message:'Success to modify your password!'});
 });
 
