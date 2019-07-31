@@ -3,7 +3,18 @@ var path = require('path');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 var app = express();
+/*
+var caver = require('caver-js');
 
+var Caver = new caver.klay.accounts.create();
+caver.klay.accounts.wallet.add('account.privateKey', 'account.address');
+
+var _address = account.address;
+var _privateK = account.privateKey;
+
+//DB에 server의 지갑 주소 추가
+
+*/
 /*
 //database
 var klaytnsoridb = mysql.createConnection({
